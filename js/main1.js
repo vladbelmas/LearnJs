@@ -17,6 +17,7 @@ fun.display();
 let calculator = (function(){
     let data = { number: 0};
 
+    
     return {
         sum: function(n){
             data.number = data.number + n;
