@@ -115,3 +115,62 @@ document.write('<h3>Cities of Ukraine</h3>');
 for(var i =0; i < countryUpdate.cities.length; i++){
     document.write(countryUpdate.cities[i].name + '<br/>');
 }
+
+//check if object has property
+var user = {};
+user.name = 'Tom';
+user.age = '99';
+user.display = function(){
+    console.log(user.name);
+    console.log(user.age);
+}
+var hasNameProp = 'name' in user;
+console.log(hasNameProp);
+var hasSurnameProp = 'surname' in user;
+console.log(hasSurnameProp);
+
+var hasNameProp = user.name !== undefined;
+console.log(hasNameProp);
+
+var hasSurnameProp = user.surname !== undefined;
+console.log(hasSurnameProp);
+
+var hasNameProp = user.hasOwnProperty('name');
+console.log(hasNameProp);
+
+var hasSurnameProp = user.hasOwnProperty('surname');
+console.log(hasSurnameProp);
+
+var hasDisplayMethod = user.hasOwnProperty('display');
+console.log(hasDisplayMethod);
+
+for(var key in user){
+    console.log(key + " : " + user[key]);
+}
+
+//object in functions
+
+function createUser(pName, pAge){
+    return {
+        name: pName,
+        age: pAge,
+        displayInfo: function(){
+            document.write('Name: ' + this.name + ' age: ' + this.age + '<br/>');
+        },
+        driveCar: function(car){
+            document.write(this.name + ' drives car - ' + car.name + ' ages - '+ car.age +'<br/>');
+        }
+    }
+}
+function createCar(cName, cAge){
+    return{
+        name: cName,
+        age: cAge
+    }
+}
+var tom = createUser('Tom', 45);
+tom.displayInfo();
+var vlad = createUser('Vlad', 21);
+var bmw = createCar('BMW', 1999);
+vlad.displayInfo();
+vlad.driveCar(bmw);
