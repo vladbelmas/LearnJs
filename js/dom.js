@@ -87,3 +87,37 @@ articleDiv.replaceChild(elem, newElem);
 
 
 articleDiv.removeChild(elem);
+
+function getChildren(elem){
+    for(var i in elem.childNodes){
+        if(elem.childNodes[i].nodeType === 1){
+            console.log(elem.childNodes[i].tagName);
+            getChildren(elem.childNodes[i]);
+        }
+    }
+}
+var root = document.documentElement;
+console.log(root.tagName);
+getChildren(root);
+
+var root1 = document.querySelector('div.article');
+console.log(root1.innerText);
+console.log('_____________________');
+console.log(root1.innerHTML);
+
+root1.innerHTML = '<h2>Hello World!!</h2><p> bla bla bla</>';
+console.log(root1.getAttribute('style'));
+root1.setAttribute('style', 'color: green;')
+
+root1.removeAttribute('style');
+root1.setAttribute('style', 'border: 2px solid red; margin: 10px;')
+console.log(root1.offsetHeight);
+console.log(root1.clientHeight);
+console.log(root1.offsetWidth);
+console.log(root1.clientWidth);
+
+var root1Rect = root1.getBoundingClientRect();
+console.log('top: ' + root1Rect.top);
+console.log('right: ' + root1Rect.right);
+console.log('bottom: ' + root1Rect.bottom);
+console.log('left: ' + root1Rect.left);
