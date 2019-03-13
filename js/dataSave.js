@@ -57,7 +57,7 @@ function responseload(){
         
     }
 }
-request.open('GET', '../img/city.list.json', true);
+request.open('GET', './img/city.list.json', true);
 request.onload = responseload;
 request.send();
 
