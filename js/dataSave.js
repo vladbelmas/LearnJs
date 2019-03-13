@@ -22,7 +22,7 @@ function createImage(){
             }
         }
     }
-    request.open('GET', 'http://localhost:3000/img/test.png', true);
+    request.open('GET', '../img/test.png', true);
     request.onload = responseload;
     request.send();
 
