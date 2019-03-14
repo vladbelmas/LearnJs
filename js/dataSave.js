@@ -5,30 +5,30 @@ console.log(document.cookie);
 //alert('hello');
 
 //AJAX
-function createImage(){
-    var request = new XMLHttpRequest();
-    function responseload(){
-        if(request.readyState == 4){
-            var status = request.status;
-            if(status == 200){
+// function createImage(){
+//     var request = new XMLHttpRequest();
+//     function responseload(){
+//         if(request.readyState == 4){
+//             var status = request.status;
+//             if(status == 200){
                 
-                var block = document.getElementById('block-wrap');
-                var image = document.createElement('img');
-                image.src = request.responseURL;
-                //console.log(image);
-                block.appendChild(image);
-                //console.log(request);
+//                 var block = document.getElementById('block-wrap');
+//                 var image = document.createElement('img');
+//                 image.src = request.responseURL;
+//                 //console.log(image);
+//                 block.appendChild(image);
+//                 //console.log(request);
             
-            }
-        }
-    }
-    request.open('GET', './img/test.png', true);
-    request.onload = responseload;
-    request.send();
+//             }
+//         }
+//     }
+//     request.open('GET', './img/test.png', true);
+//     request.onload = responseload;
+//     request.send();
 
-}
-var button = document.getElementById('getImage');
-button.addEventListener('click', createImage);
+// }
+// var button = document.getElementById('getImage');
+// button.addEventListener('click', createImage);
 
 var request = new XMLHttpRequest();
 var cities;
@@ -106,24 +106,55 @@ function chooseItem(e){
     //console.log(name,id);
     inputSearch.value = name;
     inputSearch.dataset.id = id;
+    $('.input-result').each(function(){
+        $(this).remove();
+    });
+    $('.temp-result').each(function(){
+        $(this).remove();
+    })
+    
     //console.log(inputSearch);
 }
 function loadweather(e){
     var id = '//api.openweathermap.org/data/2.5/weather?id=';
     id += inputSearch.dataset.id;
+    id += '&units=metric';
     // id += '&APPID=';
     // id += 'a7bef83ddbd2e1cac553f979f59489fb';
-    function requestLoad(){
-        if(request.readyState == 4 && request.status ==200){
-            console.log(request);
-        }
-    }
-    var request = new XMLHttpRequest();
+    // function requestLoad(){
+    //     if(request.readyState == 4 && request.status ==200){
+    //     }
+    // }
+    // var request = new XMLHttpRequest();
     
-    request.open('GET', id, false);
-    request.setRequestHeader('APPID','a7bef83ddbd2e1cac553f979f59489fb');
-    request.onload = requestLoad;
-    request.send();
+    // request.open('GET', id, false);
+    // request.withCredentials = true;
+    // request.setRequestHeader('APPID','a7bef83ddbd2e1cac553f979f59489fb');
+    // console.log(request);
+    // request.onload = requestLoad;
+    // request.send();
+    var weather;
+    $.ajax({
+        url: id,
+        method: 'GET',
+        beforeSend: function(){
+            $('.temp-esult').remove();
+        },
+        data:{
+            'APPID': 'a7bef83ddbd2e1cac553f979f59489fb'
+        },
+        success: function(data){
+            weather = data;
+            console.log(weather);
+            console.log(weather.main.temp);
+            var temp = weather.main.temp;
+            var element = document.createElement('p');
+            element.className = 'temp-result';
+            element.textContent = 'Сейчас температура: ' + Math.round(weather.main.temp) + ' градусов';
+            var wrapTemp = document.getElementById('wrap-temp');
+            wrapTemp.appendChild(element);
+        }
+    })
 }
 
 var outResults;
