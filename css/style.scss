@@ -1,3 +1,4 @@
+@import 'mixins';
 body{
     color: black;
     font-size: 20px;
@@ -6,5 +7,6 @@ body{
     cursor: pointer;
     &:hover{
         color: red;
+        font-weight: 600;
     }
 }

@@ -5,4 +5,5 @@ body {
 .input-result {
   cursor: pointer; }
   .input-result:hover {
-    color: red; }
+    color: red;
+    font-weight: 600; }
