@@ -150,7 +150,7 @@ function loadweather(e){
             var temp = weather.main.temp;
             var element = document.createElement('p');
             element.className = 'temp-result';
-            element.textContent = 'Сейчас температура в '+ weather.name + ' ' + weather.sys.country + Math.round(weather.main.temp) + ' градусов';
+            element.textContent = 'Сейчас температура в '+ weather.name + ' ' + weather.sys.country + ' ' + Math.round(weather.main.temp) + ' градусов';
             var wrapTemp = document.getElementById('wrap-temp');
             wrapTemp.appendChild(element);
         }
