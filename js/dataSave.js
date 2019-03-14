@@ -88,19 +88,52 @@ function oninput(e){
             item.className = 'input-result ';
             if(inputText[i].name.length >=1){
                 item.textContent = inputText[i].name + ' ' + inputText[i].country;
-                item.className += inputText[i].id;
+                item.dataset.id = inputText[i].id;
                 inputSearch.appendChild(item);
+                outResults = document.querySelectorAll('.input-result');
+                outResults.forEach(elem => {
+                    elem.addEventListener('click', chooseItem);
+                });
             }
 
         }
     }
-
-
     
-
 }
+function chooseItem(e){
+    var name = e.target.textContent;
+    var id = e.target.dataset.id;
+    //console.log(name,id);
+    inputSearch.value = name;
+    inputSearch.dataset.id = id;
+    //console.log(inputSearch);
+}
+function loadweather(e){
+    var id = '//api.openweathermap.org/data/2.5/weather?id=';
+    id += inputSearch.dataset.id;
+    // id += '&APPID=';
+    // id += 'a7bef83ddbd2e1cac553f979f59489fb';
+    function requestLoad(){
+        if(request.readyState == 4 && request.status ==200){
+            console.log(request);
+        }
+    }
+    var request = new XMLHttpRequest();
+    
+    request.open('GET', id, false);
+    request.setRequestHeader('APPID','a7bef83ddbd2e1cac553f979f59489fb');
+    request.onload = requestLoad;
+    request.send();
+}
+
+var outResults;
 var inputSearch = document.getElementById('input-text');
 inputSearch.addEventListener('keyup', oninput);
+
+var getWeather = document.getElementById('getWeather');
+
+getWeather.addEventListener('click', loadweather);
+
 
 
 

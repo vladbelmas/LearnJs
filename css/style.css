@@ -1,0 +1,8 @@
+body {
+  color: black;
+  font-size: 20px; }
+
+.input-result {
+  cursor: pointer; }
+  .input-result:hover {
+    color: red; }
